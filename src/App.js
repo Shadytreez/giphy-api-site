@@ -105,7 +105,17 @@ class App extends Component{
          <button type ="button" onClick={this.getTrending}> Trending Gif</button>
        <button type ="button" onClick={this.getRandom}> Random Gif</button>
        </form>
-      
+       <div className="rating">
+       <label for="cars">Rating:</label>
+       <select name="cars" id="cars">
+        <option value="">No rating</option>
+        <option value="g">G</option>
+        <option value="pg">PG</option>
+       <option value="pg-13">PG-13</option>
+       <option value="r">R</option>
+        </select>
+       </div>
+       
        <div className="container">
        {this.state.v}
        </div>
