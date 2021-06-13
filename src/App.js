@@ -34,7 +34,26 @@ class App extends Component{
     }
 
   getRandom(){
-    const url = "http://api.giphy.com/v1/gifs/random?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R";
+    const url = "http://api.giphy.com/v1/gifs/random?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R"; 
+
+    fetch(url).
+    then(response => response.json()).
+    then(responseJson => {
+      //console.log(responseJson);
+      this.setState({gifs: responseJson.data});
+      console.log(this.state.gifs);
+    })
+    .then(city =>{
+      for(let i in this.state.gifs){
+        var joined = this.state.v.concat(<GifCard gif={this.state.gifs[i]}/>);
+        this.setState({ v: joined });
+      }
+    })  
+    .catch((error) => {
+      console.log("Failed to retrieve random gifs");
+    });
+  }
+
   }
 
   getSearch(){
