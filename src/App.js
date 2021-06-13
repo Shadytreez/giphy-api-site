@@ -1,17 +1,21 @@
 import React,{Component} from 'react';
 import './App.css';
 import GifCard from "./gifcard";
+
+
 class App extends Component{
   
-    
-    state={
-      gifs:[],
+  state = {
+    gifs:[],
       v: [],
-    };
+      clear: [],
+  }
 
+    
 
   getTrending = () =>
   { 
+    this.setState({v: []})
     const url = "http://api.giphy.com/v1/gifs/trending?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R";
 
 
@@ -35,6 +39,7 @@ class App extends Component{
 
   getRandom = () =>
   {
+    this.setState({v: []})
     const url = "http://api.giphy.com/v1/gifs/random?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R";
   
     fetch(url).
@@ -58,9 +63,10 @@ class App extends Component{
 
   getSearch= () =>
   { 
+    this.setState({v: []})
     const searchTerm = document.getElementById("search").value;
     const url = "http://api.giphy.com/v1/gifs/search?q=" +searchTerm+"&api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R";
-
+    
 
       fetch(url).
       then(response => response.json()).
