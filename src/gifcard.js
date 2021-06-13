@@ -4,7 +4,7 @@ import './App.css';
 function GifCard(props){
     return(
         <div className="box">
-            <img src={props.gif.images.fixed_height.url} />
+            <img src={props.gif.images.downsized_medium.url} />
         </div>
     )
 }
