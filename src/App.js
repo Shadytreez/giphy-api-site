@@ -1,11 +1,11 @@
 import React,{Component} from 'react';
-import City from "./city"
 import './App.css';
+import GifCard from "./gifcard";
 class App extends Component{
   
     
     state={
-      cities:[],
+      gifs:[],
       v: [],
     };
 
@@ -14,32 +14,24 @@ class App extends Component{
   { 
     const url = "http://api.giphy.com/v1/gifs/trending?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R";
 
-    if(zipCode.length === 5)
-    {
+
       fetch(url).
       then(response => response.json()).
       then(responseJson => {
-        console.log(responseJson);
-        this.setState({cities: responseJson});
-      }).
-      then(city => {
-        for(let i in this.state.cities)
-        {
-          console.log(i);
-          var joined = this.state.v.concat(<City city={this.state.cities[i]}/>);
-          console.log(joined);
+        //console.log(responseJson);
+        this.setState({gifs: responseJson.data});
+        console.log(this.state.gifs);
+      })
+      .then(city =>{
+        for(let i in this.state.gifs){
+          var joined = this.state.v.concat(<GifCard gif={this.state.gifs[i]}/>);
           this.setState({ v: joined });
-          console.log(this.state.v[i]);
-          console.log(this.state.cities[i]);
-        } 
-      }).catch((error) => {
-        alert("not a valid zip code");
+        }
+      })  
+      .catch((error) => {
+        console.log("Failed to retrieve trending gifs");
       });
-    }else{
-      alert("zip code should be 5 numbers");
     }
-   
-  }
 
   getRandom(){
     const url = "http://api.giphy.com/v1/gifs/random?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R";
@@ -47,7 +39,7 @@ class App extends Component{
 
   getSearch(){
     const searchTerm = document.getElementById("search").value;
-    const url = "http://api.giphy.com/v1/gifs/search?q=" +SEARCH+TERM+GOES+HERE+"&api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R";
+    const url = "http://api.giphy.com/v1/gifs/search?q=" +searchTerm+"&api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R";
   }
   
 
@@ -58,11 +50,13 @@ class App extends Component{
 
     return (
     <div className="content">
-      <h1>Zip Code Search</h1>
+      <h1>Giphy Api</h1>
       <form id ="form">
-         <p>Zip Code </p> <input id="search" placeholder="12345" type="text"/>
-         <button type ="button" onClick={this.getCities}> Submit</button>
+         <p>Image tag search </p> <input id="search" placeholder="12345" type="text"/>
+         <button type ="button" onClick={this.getSearch}> Submit</button>
        </form>
+       <button type ="button" onClick={this.getTrending}> Trending Gif</button>
+       <button type ="button" onClick={this.getRandom}> Random Gif</button>
         {this.state.v}
        
     </div>)
