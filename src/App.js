@@ -97,15 +97,18 @@ class App extends Component{
    
 
     return (
-    <div className="content">
-      <h1>Giphy Api</h1>
-      <form id ="form">
-         <p>Image tag search </p> <input id="search" placeholder="12345" type="text"/>
+    <div >
+      <h1 className="content">Giphy Api</h1>
+      <form id ="form" className="content">
+        <input id="search" placeholder="Insert topic" type="text"/>
          <button type ="button" onClick={this.getSearch}> Submit</button>
-       </form>
-       <button type ="button" onClick={this.getTrending}> Trending Gif</button>
+         <button type ="button" onClick={this.getTrending}> Trending Gif</button>
        <button type ="button" onClick={this.getRandom}> Random Gif</button>
-        {this.state.v}
+       </form>
+      
+       <div className="container">
+       {this.state.v}
+       </div>
        
     </div>)
   }
