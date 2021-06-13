@@ -9,13 +9,15 @@ class App extends Component{
     gifs:[],
       v: [],
       clear: [],
+      currentGif: 0,
   }
 
     
 
   getTrending = () =>
   { 
-    this.setState({v: []})
+    this.setState({currentGif: 1});
+    this.setState({v: []});
     const rating = document.getElementById("rate").value;
     const url = "http://api.giphy.com/v1/gifs/trending?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R&rating=" + rating;
 
@@ -39,9 +41,10 @@ class App extends Component{
 
   getRandom = () =>
   {
+    this.setState({currentGif: 2});
     this.setState({v: []})
     const rating = document.getElementById("rate").value;
-    const url = "http://api.giphy.com/v1/gifs/random?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R&tag=american+psycho";
+    const url = "http://api.giphy.com/v1/gifs/random?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R&rating=" + rating;
   
     fetch(url).
       then(response => response.json()).
@@ -64,6 +67,7 @@ class App extends Component{
 
   getSearch= () =>
   { 
+    this.setState({currentGif: 3});
     this.setState({v: []})
     const rating = document.getElementById("rate").value;
     const searchTerm = document.getElementById("search").value;
@@ -87,6 +91,19 @@ class App extends Component{
         console.log("Failed to retrieve trending gifs");
       });
   }
+
+
+  getRatingGif = () =>
+  {
+    console.log(this.state.currentGif)
+    if(this.state.currentGif === 1){
+      this.getTrending()
+    }else if(this.state.currentGif === 2){
+      this.getRandom()
+    }else if(this.state.currentGif === 3){
+      this.getSearch()
+    }
+  }
     
   
   componentDidMount(){
@@ -109,7 +126,7 @@ class App extends Component{
        </form>
        <div className="rating">
        <label for="rate">Rating:</label>
-       <select id="rate">
+       <select onChange={this.getRatingGif} id="rate">
         <option value="">No rating</option>
         <option value="g">G</option>
         <option value="pg">PG</option>
