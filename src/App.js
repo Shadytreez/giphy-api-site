@@ -16,8 +16,8 @@ class App extends Component{
   getTrending = () =>
   { 
     this.setState({v: []})
-    const url = "http://api.giphy.com/v1/gifs/trending?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R";
-
+    const rating = document.getElementById("rate").value;
+    const url = "http://api.giphy.com/v1/gifs/trending?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R&rating=" + rating;
 
       fetch(url).
       then(response => response.json()).
@@ -40,7 +40,8 @@ class App extends Component{
   getRandom = () =>
   {
     this.setState({v: []})
-    const url = "http://api.giphy.com/v1/gifs/random?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R";
+    const rating = document.getElementById("rate").value;
+    const url = "http://api.giphy.com/v1/gifs/random?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R&rating=" + rating;
   
     fetch(url).
       then(response => response.json()).
@@ -64,8 +65,9 @@ class App extends Component{
   getSearch= () =>
   { 
     this.setState({v: []})
+    const rating = document.getElementById("rate").value;
     const searchTerm = document.getElementById("search").value;
-    const url = "http://api.giphy.com/v1/gifs/search?q=" +searchTerm+"&api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R";
+    const url = "http://api.giphy.com/v1/gifs/search?q=" +searchTerm+"&api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R&rating=" + rating;
     
 
       fetch(url).
@@ -106,8 +108,8 @@ class App extends Component{
        <button type ="button" onClick={this.getRandom}> Random Gif</button>
        </form>
        <div className="rating">
-       <label for="cars">Rating:</label>
-       <select name="cars" id="cars">
+       <label for="rate">Rating:</label>
+       <select id="rate">
         <option value="">No rating</option>
         <option value="g">G</option>
         <option value="pg">PG</option>
