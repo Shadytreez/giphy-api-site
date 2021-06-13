@@ -41,7 +41,7 @@ class App extends Component{
   {
     this.setState({v: []})
     const rating = document.getElementById("rate").value;
-    const url = "http://api.giphy.com/v1/gifs/random?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R&rating=" + rating;
+    const url = "http://api.giphy.com/v1/gifs/random?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R&tag=american+psycho";
   
     fetch(url).
       then(response => response.json()).
