@@ -21,22 +21,7 @@ class App extends Component{
     const rating = document.getElementById("rate").value;
     const url = "http://api.giphy.com/v1/gifs/trending?api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R&rating=" + rating;
 
-      fetch(url).
-      then(response => response.json()).
-      then(responseJson => {
-        //console.log(responseJson);
-        this.setState({gifs: responseJson.data});
-        console.log(this.state.gifs);
-      })
-      .then(city =>{
-        for(let i in this.state.gifs){
-          var joined = this.state.v.concat(<GifCard gif={this.state.gifs[i]}/>);
-          this.setState({ v: joined });
-        }
-      })  
-      .catch((error) => {
-        console.log("Failed to retrieve trending gifs");
-      });
+    this.componentGif(url);
   }
 
   getRandom = () =>
@@ -50,17 +35,13 @@ class App extends Component{
       then(response => response.json()).
       then(responseJson => {
         console.log("line 52", responseJson);
-        // console.log(responseJson);
         console.log(responseJson.data);
         this.setState({gifs: responseJson.data});
         console.log(this.state.gifs);
       })
-      .then(city =>{
-        // for(let i in this.state.gifs){
-        //   console.log("i",i);
+      .then( () =>{
            var joined = this.state.v.concat(<GifCard gif={this.state.gifs}/>);
            this.setState({ v: joined });
-        // }
       })  
       .catch((error) => {
         console.log("Failed to retrieve trending gifs");
@@ -76,11 +57,13 @@ class App extends Component{
     const searchTerm = document.getElementById("search").value;
     const url = "http://api.giphy.com/v1/gifs/search?q=" +searchTerm+"&api_key=eBeXFUz7YRUQL4jA0j53KCQ0t12q8y6R&rating=" + rating;
     
+    this.componentGif(url);
+  }
 
-      fetch(url).
+  componentGif = (url) =>{
+    fetch(url).
       then(response => response.json()).
       then(responseJson => {
-        //console.log(responseJson);
         this.setState({gifs: responseJson.data});
         console.log(this.state.gifs);
       })
@@ -94,7 +77,6 @@ class App extends Component{
         console.log("Failed to retrieve trending gifs");
       });
   }
-
 
   getRatingGif = () =>
   {
