@@ -49,15 +49,18 @@ class App extends Component{
     fetch(url).
       then(response => response.json()).
       then(responseJson => {
-        //console.log(responseJson);
+        console.log("line 52", responseJson);
+        // console.log(responseJson);
+        console.log(responseJson.data);
         this.setState({gifs: responseJson.data});
         console.log(this.state.gifs);
       })
       .then(city =>{
-        for(let i in this.state.gifs){
-          var joined = this.state.v.concat(<GifCard gif={this.state.gifs[i]}/>);
-          this.setState({ v: joined });
-        }
+        // for(let i in this.state.gifs){
+        //   console.log("i",i);
+           var joined = this.state.v.concat(<GifCard gif={this.state.gifs}/>);
+           this.setState({ v: joined });
+        // }
       })  
       .catch((error) => {
         console.log("Failed to retrieve trending gifs");
